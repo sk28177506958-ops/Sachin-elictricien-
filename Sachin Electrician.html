@@ -1,0 +1,168 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Sachin Electrician</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Mukta:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: single column, phone first. Hero text + a "job slip" rate card with dotted leaders; sections below stack with a sticky call bar. */
+:root {
+  --bg: #eef1f4;
+  --surface: #ffffff;
+  --ink: #14213d;
+  --muted: #55627a;
+  --line: #c9d1dc;
+  --accent: #e0a100;
+  --accent-ink: #14213d;
+  --signal: #1d6b4f;
+  --f-display: "Baloo 2", "Mukta", system-ui, sans-serif;
+  --f-body: "Mukta", system-ui, sans-serif;
+  --f-data: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1624; --surface: #182236; --ink: #eaeef5; --muted: #9aa8c0;
+    --line: #2c3b57; --accent: #f2b824; --accent-ink: #0f1624; --signal: #4cc79a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1624; --surface: #182236; --ink: #eaeef5; --muted: #9aa8c0;
+  --line: #2c3b57; --accent: #f2b824; --accent-ink: #0f1624; --signal: #4cc79a;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.6; padding-inline: 16px; padding-block: 0 88px; }
+* { box-sizing: border-box; }
+.wrap { max-width: 640px; margin-inline: auto; display: flex; flex-direction: column; gap: 44px; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+header { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 16px; border-bottom: 2px solid var(--ink); }
+.brand { font-family: var(--f-display); font-weight: 800; font-size: 1.25rem; line-height: 1.1; min-width: 0; }
+.brand small { display: block; font-family: var(--f-data); font-weight: 500; font-size: .7rem; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 6px; font-family: var(--f-body); font-weight: 700; font-size: 1rem; text-decoration: none; border: 2px solid var(--ink); cursor: pointer; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.ghost { background: transparent; color: var(--ink); }
+
+.hero { display: flex; flex-direction: column; gap: 16px; padding-top: 8px; }
+.hero h1 { font-family: var(--f-display); font-weight: 800; font-size: clamp(2.4rem, 11vw, 3.6rem); line-height: 1.05; margin: 0; text-wrap: balance; }
+.hero h1 em { font-style: normal; background: linear-gradient(transparent 62%, var(--accent) 62%); }
+.hero p { margin: 0; color: var(--muted); max-width: 34ch; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+h2 { font-family: var(--f-display); font-weight: 800; font-size: 1.7rem; line-height: 1.15; margin: 0 0 16px; text-wrap: balance; }
+
+.slip { background: var(--surface); border: 2px solid var(--ink); border-radius: 4px; padding: 20px 18px 8px; position: relative; }
+.slip-head { display: flex; justify-content: space-between; gap: 8px; font-family: var(--f-data); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-bottom: 12px; border-bottom: 2px dashed var(--line); }
+.rates { list-style: none; margin: 0; padding: 0; }
+.rates li { display: flex; align-items: baseline; gap: 8px; padding-block: 13px; border-bottom: 1px solid var(--line); }
+.rates li:last-child { border-bottom: 0; }
+.rates .name { font-weight: 700; min-width: 0; }
+.rates .dots { flex: 1; border-bottom: 2px dotted var(--line); transform: translateY(-4px); min-width: 12px; }
+.rates .price { font-family: var(--f-data); font-weight: 600; font-size: 1.05rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin: 0; padding: 0; }
+.chips li { padding: 8px 14px; border: 2px solid var(--ink); border-radius: 999px; font-weight: 600; background: var(--surface); }
+.note { color: var(--muted); margin: 14px 0 0; }
+
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.fact { background: var(--surface); border: 2px solid var(--line); border-radius: 4px; padding: 16px; min-width: 0; }
+.fact .k { font-family: var(--f-data); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.fact .v { font-family: var(--f-display); font-weight: 800; font-size: 1.35rem; line-height: 1.25; margin-top: 4px; }
+
+.contact { background: var(--ink); color: var(--bg); border-radius: 6px; padding: 24px 20px; display: flex; flex-direction: column; gap: 14px; }
+.contact h2 { margin: 0; }
+.number { font-family: var(--f-data); font-weight: 600; font-size: clamp(1.8rem, 9vw, 2.4rem); letter-spacing: .02em; user-select: all; }
+.contact .btn { border-color: var(--bg); }
+.contact .btn.primary { border-color: var(--accent); }
+.contact .btn.ghost { color: var(--bg); }
+.contact p { margin: 0; opacity: .85; }
+#copied { font-family: var(--f-data); font-size: .85rem; min-height: 1.2em; color: var(--accent); }
+
+footer { color: var(--muted); font-size: .9rem; padding-bottom: 8px; }
+
+.callbar { position: fixed; left: 0; right: 0; bottom: 0; background: var(--accent); color: var(--accent-ink); display: flex; align-items: center; justify-content: center; gap: 12px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); border-top: 2px solid var(--ink); font-weight: 700; text-decoration: none; }
+.callbar span { font-family: var(--f-data); font-weight: 600; font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: no-preference) { .btn { transition: transform .12s; } .btn:active { transform: translateY(1px); } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">Sachin Electrician<small>Home Service · कानपुर देहात</small></div>
+    <a class="btn primary" href="tel:9511479414" aria-label="कॉल करें">कॉल करें</a>
+  </header>
+
+  <section class="hero">
+    <h1>घर बैठे, <em>सही रेट</em> पर मरम्मत</h1>
+    <p>पंखा, मिक्सर, वायरिंग और बाकी बिजली के सामान की मरम्मत आपके घर आकर। मालिक: सचिन कुमार।</p>
+    <div class="cta-row">
+      <a class="btn primary" href="#sampark">नंबर देखें</a>
+      <a class="btn ghost" href="#rate">रेट लिस्ट</a>
+    </div>
+  </section>
+
+  <section id="rate">
+    <h2>मरम्मत के रेट</h2>
+    <div class="slip">
+      <div class="slip-head"><span>रेट लिस्ट</span><span>होम सर्विस</span></div>
+      <ul class="rates">
+        <li><span class="name">पंखा रिपेयर</span><span class="dots"></span><span class="price">₹250</span></li>
+        <li><span class="name">मिक्सर रिपेयर</span><span class="dots"></span><span class="price">₹300</span></li>
+        <li><span class="name">अंडरग्राउंड वायरिंग</span><span class="dots"></span><span class="price">₹450</span></li>
+        <li><span class="name">इलेक्ट्रिक काँटा</span><span class="dots"></span><span class="price">₹480</span></li>
+        <li><span class="name">कलर टीवी रिपेयर</span><span class="dots"></span><span class="price">₹550</span></li>
+        <li><span class="name">ईको मिल्क मशीन</span><span class="dots"></span><span class="price">₹1500</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>हम क्या बनाते हैं</h2>
+    <ul class="chips">
+      <li>पंखा</li><li>लाइट और स्विच फिटिंग</li><li>कलर टीवी</li><li>मिक्सर</li><li>घर की वायरिंग</li><li>अंडरग्राउंड वायरिंग</li><li>ईको मिल्क मशीन</li><li>इलेक्ट्रिक काँटा</li><li>छोटे इलेक्ट्रिकल काम</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>नया सामान भी मिलता है</h2>
+    <ul class="chips">
+      <li>पंखा</li><li>कलर टीवी</li><li>मिक्सर</li><li>ईको मिल्क मशीन</li><li>इलेक्ट्रिक काँटा</li>
+    </ul>
+    <p class="note">नए सामान का भाव जानने के लिए फोन करें।</p>
+  </section>
+
+  <section class="facts">
+    <div class="fact"><div class="k">समय</div><div class="v">सुबह 10 बजे से शाम 4 बजे तक</div></div>
+    <div class="fact"><div class="k">इलाका</div><div class="v">कानपुर देहात</div></div>
+    <div class="fact"><div class="k">सेवा</div><div class="v">घर आकर मरम्मत</div></div>
+  </section>
+
+  <section id="sampark" class="contact">
+    <h2>सचिन कुमार से बात करें</h2>
+    <div class="number" id="num">9511479414</div>
+    <div class="cta-row">
+      <a class="btn primary" href="tel:9511479414">कॉल करें</a>
+      <a class="btn ghost" href="https://wa.me/919511479414?text=Hello%20Sachin%20Electrician%2C%20mujhe%20home%20service%20chahiye.">WhatsApp</a>
+      <button class="btn ghost" id="copy" type="button">नंबर कॉपी करें</button>
+    </div>
+    <div id="copied" role="status"></div>
+    <p>सुबह 10 बजे से शाम 4 बजे के बीच फोन करें।</p>
+  </section>
+
+  <footer>© 2026 Sachin Electrician | Home Service, कानपुर देहात</footer>
+</div>
+
+<a class="callbar" href="tel:9511479414">कॉल करें <span>9511479414</span></a>
+
+<script>
+document.getElementById('copy').addEventListener('click', function () {
+  var msg = document.getElementById('copied');
+  var done = function () { msg.textContent = 'नंबर कॉपी हो गया'; };
+  var fallback = function () {
+    var r = document.createRange(); r.selectNodeContents(document.getElementById('num'));
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    msg.textContent = 'नंबर चुना गया है, कॉपी कर लें';
+  };
+  try { navigator.clipboard.writeText('9511479414').then(done, fallback); } catch (e) { fallback(); }
+});
+</script>
+
+</body></html>
